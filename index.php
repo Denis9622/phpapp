@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP blog</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <?php
+    $website_title = 'PHP блог';
+    require 'blocks/head.php';
+  ?>
 </head>
 <body>
-    <h1>Feedback Form</h1>
-   
+  <?php require 'blocks/header.php'; ?>
+
+  <main class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mb-3">
+        Основная часть сайта
+      </div>
+
+      <?php require 'blocks/aside.php'; ?>
+    </div>
+  </main>
+
+  <?php require 'blocks/footer.php'; ?>
 </body>
 </html>
