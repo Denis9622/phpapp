@@ -3,7 +3,7 @@
 
 <head>
   <?php
-  $website_title = 'Реєстрація на сайті';
+  $website_title = 'Контакты';
   require 'blocks/head.php';
   ?>
 </head>
@@ -14,7 +14,7 @@
   <main class="container mt-5">
     <div class="row">
       <div class="col-md-8 mb-3">
-        <h4>Форма реєстрації</h4>
+        <h4>Зворотній зв'язок</h4>
         <form action="" method="post">
           <label for="username">Ваше ім'я</label>
           <input type="text" name="username" id="username" class="form-control">
@@ -22,16 +22,13 @@
           <label for="email">Email</label>
           <input type="email" name="email" id="email" class="form-control">
 
-          <label for="login">Логін</label>
-          <input type="text" name="login" id="login" class="form-control">
-
-          <label for="pass">Пароль</label>
-          <input type="password" name="pass" id="pass" class="form-control">
+          <label for="mess">Повідомлення</label>
+          <textarea name="mess" id="mess" class="form-control"></textarea>
 
           <div class="alert alert-danger mt-2" id="errorBlock"></div>
 
-          <button type="button" id="reg_user" class="btn btn-success mt-3">
-            Зареєструватися
+          <button type="button" id="mess_send" class="btn btn-success mt-3">
+            Відправити повідомлення
           </button>
         </form>
       </div>
@@ -44,22 +41,24 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <script>
-    $('#reg_user').click(function () {
+    $('#mess_send').click(function () {
       var name = $('#username').val();
       var email = $('#email').val();
-      var login = $('#login').val();
-      var pass = $('#pass').val();
+      var mess = $('#mess').val();
 
       $.ajax({
-        url: 'ajax/reg.php',
+        url: 'ajax/mail.php',
         type: 'POST',
         cache: false,
-        data: { 'username': name, 'email': email, 'login': login, 'pass': pass },
+        data: { 'username': name, 'email': email, 'mess': mess },
         dataType: 'html',
         success: function (data) {
           if (data == 'Готово') {
-            $('#reg_user').text('Все готово');
+            $('#mess_send').text('Все готово');
             $('#errorBlock').hide();
+            $('#username').val("");
+            $('#email').val("");
+            $('#mess').val("");
           } else {
             $('#errorBlock').show();
             $('#errorBlock').text(data);
